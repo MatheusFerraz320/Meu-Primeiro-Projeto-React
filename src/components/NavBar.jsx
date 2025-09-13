@@ -1,42 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [desktopVisible, setDesktopVisible] = useState(false);
-  const [logoVisible, setLogoVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDesktopVisible(true);
-      setLogoVisible(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <nav className="bg-white shadow-md fixed w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div
-            className={`flex-shrink-0 text-2xl font-bold text-indigo-600 transform transition-all duration-500 ease-out ${
-              logoVisible
-                ? "translate-x-0 opacity-100"
-                : "translate-x-20 opacity-0"
-            }`}
-          >
+          <div className="flex-shrink-0 text-2xl font-bold text-indigo-600 transform transition-all duration-500 ease-out translate-x-0 opacity-100">
             WeatherTest
           </div>
 
           {/* Desktop Menu */}
-          <div
-            className={`hidden md:flex space-x-6 transform transition-all duration-500 ease-out ${
-              desktopVisible
-                ? "translate-x-0 opacity-100"
-                : "translate-x-20 opacity-0"
-            }`}
-          >
+          <div className="hidden md:flex space-x-6 transform transition-all duration-500 ease-out translate-x-0 opacity-100">
             <a
               href="#"
               className="text-gray-700 hover:text-indigo-600 transition"
@@ -68,6 +46,7 @@ export default function Navbar() {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="text-gray-700 hover:text-indigo-600"
+              aria-label="Abrir menu"
             >
               {menuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
@@ -89,24 +68,28 @@ export default function Navbar() {
           <a
             href="#"
             className="block text-gray-700 hover:text-indigo-600 transition"
+            onClick={() => setMenuOpen(false)}
           >
             Home
           </a>
           <a
             href="#"
             className="block text-gray-700 hover:text-indigo-600 transition"
+            onClick={() => setMenuOpen(false)}
           >
             Sobre
           </a>
           <a
             href="#"
             className="block text-gray-700 hover:text-indigo-600 transition"
+            onClick={() => setMenuOpen(false)}
           >
             Serviços
           </a>
           <a
             href="#"
             className="block text-gray-700 hover:text-indigo-600 transition"
+            onClick={() => setMenuOpen(false)}
           >
             Contato
           </a>
