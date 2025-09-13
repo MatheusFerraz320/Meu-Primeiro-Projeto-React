@@ -6,10 +6,11 @@ import WeatherCard from "./WeatherCard";
 }
 export default function Weather() {
   const [weather, setWeather] = useState(null);
+  const [error, setError] = useState("");
   const [city, setCity] = useState("");
 
   const fetchWeather = async () => {
-    if (!city) return; // evita chamadas vazias
+    if (!city) return;
     try {
       const apiKey = "6810eed503dba575c0243dd41638906a";
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=pt_br`;
@@ -17,6 +18,7 @@ export default function Weather() {
       setWeather(response.data);
     } catch (error) {
       console.error("Erro ao buscar clima:", error);
+      setError("Cidade inexistente ou erro de conexão  ");
     }
   };
 
@@ -38,6 +40,7 @@ export default function Weather() {
       >
         Buscar Clima
       </button>
+      {error && <p className="text-red-500 font-medium">{error}</p>}
 
       <WeatherCard weather={weather} />
     </div>
